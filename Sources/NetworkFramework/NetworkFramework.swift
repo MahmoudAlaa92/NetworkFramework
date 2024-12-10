@@ -7,9 +7,15 @@ public struct User: Decodable, Sendable {
     let price: Double?
 }
 
+public struct Category: Decodable, Sendable {
+    let id: Int?
+    let userId: Int?
+    let date: String?
+}
+
 public class NetworkManager {
  
-    public static func fetchData(completion:@Sendable @escaping (Result< [User], AFError>) -> Void ) {
+    public static func fetchProducts(completion: @Sendable @escaping (Result< [User], AFError>) -> Void ) {
         
         let url = URL(string: "https://fakestoreapi.com/products")!
         
@@ -17,4 +23,13 @@ public class NetworkManager {
             completion(response.result)
         }
     }
+    
+    public static func fetchAllCategories(completion: @Sendable @escaping (Result< [Category], AFError>) -> Void ) {
+        let url = URL(string: "https://fakestoreapi.com/carts")!
+        
+        AF.request(url).responseDecodable(of: [Category].self) { response in
+            completion(response.result)
+        }
+    }
+    
 }
