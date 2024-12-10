@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-struct User: Decodable {
+public struct User: Decodable, Sendable {
     let id: Int?
     let title: String?
     let price: Double?
@@ -9,7 +9,7 @@ struct User: Decodable {
 
 public class NetworkManager {
  
-    func fetchData(completion:@Sendable @escaping (Result< [User], AFError>) -> Void ) {
+    public static func fetchData(completion:@Sendable @escaping (Result< [User], AFError>) -> Void ) {
         
         let url = URL(string: "https://fakestoreapi.com/products")!
         
